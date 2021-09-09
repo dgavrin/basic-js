@@ -1,6 +1,5 @@
 import { NotImplementedError } from '../extensions/index.js';
 
-const INCORRECT_RESULT_MSG = 'Invalid date!';
 
 /**
  * Extract season from given date and expose the enemy scout!
@@ -14,18 +13,18 @@ const INCORRECT_RESULT_MSG = 'Invalid date!';
  * 
  */
 export default function getSeason(date) {
-  let season = '';
-  let monthNumber = -1;
-  if (date == undefined) {
-    season = 'Unable to determine the time of year!';
+  if (!date) {
+    return 'Unable to determine the time of year!';
   }
 
   try {
-    monthNumber = date.getMonth();
+    date.toTimeString();
   } catch (e) {
-    throw new Error(INCORRECT_RESULT_MSG);
+    throw new Error('Invalid date!');
   }
 
+  let season = '';
+  let monthNumber = date.getMonth();
   if (monthNumber >= 2 && monthNumber <= 4) {
     season = 'spring';
   } else if (monthNumber >= 5 && monthNumber <= 7) {
